@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishamber's Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+<link rel="icon" type="image/png" href="Vishamber 6.jpg" />
+</head>
+<body>
+  <header>
+    <nav>
+      
+      <div class="nav-left">
+        <img src="Vishamber 5.jpg" alt="Vishamber Profile" class="profile-img" />
+        <h1>Vishamber</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+
+  <section id="home">
+    <h2>Hello, I'm Vishamber</h2>
+    <p>A passionate Web Developer and AI/ML enthusiast with a strong drive to turn ideas into impactful digital solutions.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm an enthusiastic Web Developer and an AI/ML student from Lamrin Tech Skills University, Punjab. With a passion for coding, solving real-world problems using technology, and exploring the future of Artificial Intelligence, I aim to build smart and impactful digital solutions.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Python, Flask</li>
+      <li>Machine Learning, AI</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li>Digital Lust - University App</li>
+      <li>Hostel Food Feedback System</li>
+      <li>Smart Edu Connect</li>
+      <li>Emotion Detection using AI</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
+      <!-- Contact Form -->
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+        <p id="success-msg"></p>
+      </form>
+  
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>VISHAMBER</h3>
+        <p>📞 8077913906</p>
+        <p>📧 <a href="mailto:vishambars662@gmail.com">vishambars662@gmail.com</a></p>
+        <p>🔗 <a href="https://www.linkedin.com/in/vishamber-b57369254/" target="_blank">LinkedIn Profile</a></p>
+        <p>💻 <a href="https://github.com/vishamver" target="_blank">GitHub Portfolio</a></p>
+        <p>📍 Mathura, India – 281122</p>
+      </div>
+    </div>
+  </section>
+  
+  
+
+  <footer>
+    <p>© <span id="year"></span> Made with ❤️ by Vishamber. All rights reserved.</p>
+  </footer>
+  
+
+  <script src="script.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyDT8EY6AsYfEN8I2LnuZNeY1YJIa62NLrI",
+  authDomain: "porfolio-b0273.firebaseapp.com",
+  databaseURL: "https://porfolio-b0273-default-rtdb.firebaseio.com/",
+  projectId: "porfolio-b0273",
+  storageBucket: "porfolio-b0273.appspot.com",
+  messagingSenderId: "458326254553",
+  appId: "1:458326254553:web:04a0d2f07aea781d982fc8",
+  measurementId: "G-LP6YRLLGWJ"
+};
+
+  
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+  
+    // Handle form submission
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+  
+      const messagesRef = database.ref("contacts");
+      const newMessage = messagesRef.push();
+  
+      newMessage
+        .set({
+          name: name,
+          email: email,
+          message: message,
+          timestamp: new Date().toISOString()
+        })
+        .then(() => {
+          document.getElementById("success-msg").textContent = "Thanks! Your message has been submitted.";
+          document.getElementById("contactForm").reset();
+        })
+        .catch((error) => {
+          document.getElementById("success-msg").textContent = "Error: " + error.message;
+        });
+        
+    });
+  </script>
+  
+</body>
+</html>
+
